@@ -1,0 +1,109 @@
+prompts = {  
+    "TipoContrato": (  
+        "Por favor, analiza el siguiente texto de contrato y extrae la información solicitada. La información que necesito es el TipoContrato y el Proveedor. Devuelve la información en formato JSON.\n"  
+        "Instrucciones:\n"  
+        "Lee el texto del contrato que se proporciona a continuación. Identifica el tipo de contrato y el nombre del proveedor. Formatea la respuesta en JSON, incluyendo solo los campos TipoContrato y Proveedor.\n"  
+        "Texto del contrato: [Inserta aquí el texto del contrato]\n"  
+        "Ejemplo de salida:\n"  
+        "{\n"  
+        '    "TipoContrato": "Prestación de Servicios",\n'  
+        '    "Proveedor": "HORNITOS S.P.A."\n'  
+        '}'  
+    ),  
+    "process_page_with_ai": (  
+        "Por favor, extrae toda la información del siguiente contenido en las páginas: ({page_number}):\n{page_content}\n\n"  
+        "El contenido debe ser analizado y estructurado en tres partes: **Metadata**, **Entidades** y **Especificaciones**.\n\n"  
+        "1. **Metadata**: Incluye información sobre la versión del documento, la fecha de creación, el autor y una breve descripción del contenido.\n"  
+        "2. **Entidades**: Extrae las entidades relevantes encontradas en el texto y dales el formato: EntityName: Value. Ejemplo: 'Persona: Juan Pérez'.\n"  
+        "3. **Especificaciones**: Extrae los siguientes detalles del contrato:\n"  
+        "   - tipoContrato: Tipo de contrato emitido por la empresa.\n"  
+        "   - tipoServicio: Categoría del servicio proporcionado.\n"  
+        "   - parteContraparte: Las partes involucradas en el contrato, Ejemplo: Parte A vs Parte B.\n"  
+        "   - fechaInicio: Fecha en que el contrato entra en vigencia.\n"  
+        "   - fechaTermino: Fecha en que el contrato finaliza. Si no está especificada, poner 'No encontrado'.\n"  
+        "   - renovacionAutomatica: Indica si el contrato se renueva automáticamente (Sí/No).\n"  
+        "   - monto: Monto asociado al contrato. Si no está especificado, poner 'No encontrado'.\n"  
+        "   - multa: Multa asociada al incumplimiento del contrato. Si no está especificada, poner 'No encontrado'.\n"  
+        "   - penalidades: Penalidades por incumplimiento de cláusulas específicas. Si no está especificada, poner 'No encontrado'.\n"  
+        "   - terminoAnticipado: Indica si existe un término anticipado y su plazo. Si no está especificada, poner 'No encontrado'.\n"  
+        "   - exclusividad: Indica si el contrato incluye cláusulas de exclusividad (Sí/No).\n\n"  
+        "Es importante mencionar las páginas de este análisis que te di.\n"  
+        "4. **IMPORTANTE: dame un resumen ejecutivo de todo el contenido de las páginas. Dame detalles, datos importantes, secciones del contrato, términos, etc.**\n"  
+        "**No debes inventar información. Si algún dato no se encuentra en el contenido proporcionado, simplemente indica 'No encontrado' en lugar de dejar el campo vacío o usar cualquier otro valor.**\n\n"  
+        "Ejemplo de respuesta en formato JSON:\n"  
+        "{\n"  
+        '  "Metadata": {\n'  
+        '    "version": "",\n'  
+        '    "fechaCreacion": "",\n'  
+        '    "autor": "",\n'  
+        '    "descripcion": ""\n'  
+        '  },\n'  
+        '  "ResumenEjecutivo": "",\n'  
+        '  "Paginas": "",\n'  
+        '  "Entidades": {\n'  
+        '    "Persona": "",\n'  
+        '    "Fecha": "",\n'  
+        '    "Monto": ""\n'  
+        '  },\n'  
+        '  "Especificaciones": {\n'  
+        '    "contratos": [\n'  
+        '      {\n'  
+        '        "propertyName": "tipoContrato",\n'  
+        '        "descripcion": "Tipo de contrato emitido por la empresa.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "tipoServicio",\n'  
+        '        "descripcion": "Categoría del servicio proporcionado.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "parteContraparte",\n'  
+        '        "descripcion": "Las partes involucradas en el contrato.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "fechaInicio",\n'  
+        '        "descripcion": "Fecha en que el contrato entra en vigencia.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "fechaTermino",\n'  
+        '        "descripcion": "Fecha en que el contrato finaliza.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "renovacionAutomatica",\n'  
+        '        "descripcion": "Indica si el contrato se renueva automáticamente.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "monto",\n'  
+        '        "descripcion": "Monto asociado al contrato.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "multa",\n'  
+        '        "descripcion": "Multa asociada al incumplimiento del contrato.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "penalidades",\n'  
+        '        "descripcion": "Penalidades por incumplimiento de cláusulas específicas.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "terminoAnticipado",\n'  
+        '        "descripcion": "Indica si existe un término anticipado y su plazo.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "exclusividad",\n'  
+        '        "descripcion": "Indica si el contrato incluye cláusulas de exclusividad.",\n'  
+        '        "valor": ""\n'  
+        '      }\n'  
+        '    ]\n'  
+        '  }\n'  
+        '}'  
+    )  
+}  

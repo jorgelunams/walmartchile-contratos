@@ -1,0 +1,261 @@
+{  "TipoContrato": (  
+        "Por favor, analiza el siguiente texto de contrato y extrae la información solicitada. La información que necesito es el TipoContrato y el Proveedor. Devuelve la información en formato JSON.\n"  
+        "Instrucciones:\n"  
+        "Lee el texto del contrato que se proporciona a continuación. Identifica el tipo de contrato y el nombre del proveedor. Formatea la respuesta en JSON, incluyendo solo los campos TipoContrato y Proveedor.\n"  
+        "Texto del contrato: [Inserta aquí el texto del contrato]\n"  
+        "Ejemplo de salida:\n"  
+        "{\n"  
+        '    "TipoContrato": "Prestación de Servicios",\n'  
+        '    "Proveedor": "HORNITOS S.P.A."\n'  
+        '}'  
+    ), 
+     "ParteContraparte": (
+        "Necesito que extraigas de un contrato la información de las dos partes contratantes, distinguiendo lo que se denomina 'parte' y 'contraparte'. "
+        "La 'parte' corresponde a la empresa contratante y debe incluir, cuando sea posible, su nombre (o alias), RUT, dirección y los datos de sus representantes (nombre y cédula). "
+        "La 'contraparte' es el proveedor o prestador de servicios, por lo que debe incluir su nombre, RUT, dirección, datos del representante (nombre y cédula) y una breve descripción de los servicios que presta. "
+        "Por favor, devuelve la información en un objeto JSON con dos llaves principales: 'parte' y 'contraparte'. Usa el siguiente formato de ejemplo:\n\n"
+        "{\n"
+        " 'parte': {\n"
+        " 'nombre': '',\n"
+        " 'RUT': '',\n"
+        " 'direccion': '<Dirección de la Empresa>',\n"
+        " 'representante': {\n"
+        " 'nombre': '',\n"
+        " 'cedula': '<Cédula del Representante>'\n"
+        " }\n"
+        " },\n"
+        " 'contraparte': {\n"
+        " 'nombre': '',\n"
+        " 'RUT': '',\n"
+        " 'direccion': '<Dirección del Proveedor>',\n"
+        " 'representante': {\n"
+        " 'nombre': '',\n"
+        " 'cedula': '<Cédula del Representante>'\n"
+        " },\n"
+        " 'servicios': '<Descripción de los servicios prestados>'\n"
+        " }\n"
+        "}"
+    ),
+    "process_page_with_ai": (  
+        "Por favor, extrae toda la información del siguiente contenido en las paginas: ({page_number}):\n{page_content}\n\n"  
+        "El contenido debe ser analizado y estructurado en tres partes: **Metadata**, **Entidades** y **Especificaciones**.\n\n"  
+        "1. **Metadata**: Incluye información sobre la versión del documento, la fecha de creación, el autor y una breve descripción del contenido.\n"  
+        "2. **Entidades**: Extrae las entidades relevantes encontradas en el texto y dales el formato: EntityName: Value. Ejemplo: 'Persona: Juan Pérez'.\n"  
+        "3. **Especificaciones**: Extrae los siguientes detalles del contrato:\n"  
+        "   - tipoContrato: Tipo de contrato emitido por la empresa.\n"  
+        "   - tipoServicio: Categoría del servicio proporcionado.\n"  
+        "   - parteContraparte: Las partes involucradas en el contrato, Ejemplo: Parte A vs Parte B.\n"  
+        "   - fechaInicio: Fecha en que el contrato entra en vigencia.\n"  
+        "   - fechaTermino: Fecha en que el contrato finaliza. Si no está especificada, poner 'No encontrado'.\n"  
+        "   - renovacionAutomatica: Indica si el contrato se renueva automáticamente (Sí/No).\n"  
+        "   - monto: Monto asociado al contrato. Si no está especificado, poner 'No encontrado'.\n"  
+        "   - multa: Multa asociada al incumplimiento del contrato. Si no está especificada, poner 'No encontrado'.\n"  
+        "   - penalidades: Penalidades por incumplimiento de cláusulas específicas. Si no está especificada, poner 'No encontrado'.\n"  
+        "   - terminoAnticipado: Indica si existe un término anticipado y su plazo. Si no está especificada, poner 'No encontrado'.\n"  
+        "   - exclusividad: Indica si el contrato incluye cláusulas de exclusividad (Sí/No).\n\n"  
+        "Es importante mencionar las paginas de este análisis que te di.\n"  
+        "4. **IMPORTANTE: dame un resumen ejecutivo de todo el contenido de las páginas. Dame detalles, datos importantes, secciones del contrato, términos, etc.**\n"  
+        "**No debes inventar información. Si algún dato no se encuentra en el contenido proporcionado, simplemente indica 'No encontrado' en lugar de dejar el campo vacío o usar cualquier otro valor.**\n\n"  
+        "Ejemplo de respuesta en formato JSON:\n"  
+        "{\n"  
+        '  "Metadata": {\n'  
+        '    "version": "",\n'  
+        '    "fechaCreacion": "",\n'  
+        '    "autor": "",\n'  
+        '    "descripcion": ""\n'  
+        '  },\n'  
+        '  "ResumenEjecutivo": "",\n'  
+        '  "Paginas": "",\n'  
+        '  "Entidades": {\n'  
+        '    "Persona": "",\n'  
+        '    "Fecha": "",\n'  
+        '    "Monto": ""\n'  
+        '  },\n'  
+        '  "Especificaciones": {\n'  
+        '    "contratos": [\n'  
+        '      {\n'  
+        '        "propertyName": "tipoContrato",\n'  
+        '        "descripcion": "Tipo de contrato emitido por la empresa.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "tipoServicio",\n'  
+        '        "descripcion": "Categoría del servicio proporcionado.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "parteContraparte",\n'  
+        '        "descripcion": "Las partes involucradas en el contrato.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "fechaInicio",\n'  
+        '        "descripcion": "Fecha en que el contrato entra en vigencia.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "fechaTermino",\n'  
+        '        "descripcion": "Fecha en que el contrato finaliza.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "renovacionAutomatica",\n'  
+        '        "descripcion": "Indica si el contrato se renueva automáticamente.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "monto",\n'  
+        '        "descripcion": "Monto asociado al contrato.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "multa",\n'  
+        '        "descripcion": "Multa asociada al incumplimiento del contrato.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "penalidades",\n'  
+        '        "descripcion": "Penalidades por incumplimiento de cláusulas específicas.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "terminoAnticipado",\n'  
+        '        "descripcion": "Indica si existe un término anticipado y su plazo.",\n'  
+        '        "valor": ""\n'  
+        '      },\n'  
+        '      {\n'  
+        '        "propertyName": "exclusividad",\n'  
+        '        "descripcion": "Indica si el contrato incluye cláusulas de exclusividad.",\n'  
+        '        "valor": ""\n'  
+        '      }\n'  
+        '    ]\n'  
+        '  }\n'  
+        '}'  
+    ),  
+    "process_page_with_ai_multas": (  
+        "Tu trabajo es extraer todas las multas y penalidades que encuentres en el texto. Dame todo el detalle posible de cada multa o penalidad. "  
+        "No me des un resumen, dame todos los detalles de cada multa o penalidad que encuentres.\n\n"  
+        "Especifica las paginas donde se encuentran las multas y penalidades. Formatea tu respuesta en JSON con tablas que especifiquen las multas, cantidades, condiciones, etc. "  
+        "Necesitamos poder leer las multas con un programa de Python. Solo dame la respuesta en JSON, no me des explicaciones ni comentarios. "  
+        "Trata de traducir el texto a números o condiciones que se puedan leer o procesar tales cantidades, fechas, etc.\n\n"  
+        "Ejemplo multa de tanto por incumplimiento de ... especificación número 2, encontrada en página x, todo en JSON formateado.\n"  
+        "Aquí tienes un ejemplo:\n"  
+        "{\n"  
+        "  \"multas\": [\n"  
+        "    {\n"  
+        "      \"descripcion\": \"Incumplimiento de indicadores de cumplimiento\",\n"  
+        "      \"detalles\": {\n"  
+        "        \"proveedor\": \"Proveedor de servicios de limpieza\",\n"  
+        "        \"evaluacion\": \"Evaluación trimestral\",\n"  
+        "        \"resultado\": \"Servicios proporcionados no cumplen con los indicadores establecidos en el Anexo Nº 1 del contrato\",\n"  
+        "        \"multa\": {\n"  
+        "          \"multa\": \"Terminación inmediata del contrato sin indemnización\",\n"  
+        "          \"causal\": \"Incumplimiento de indicadores de cumplimiento\",\n"  
+        "          \"condiciones\": [\n"  
+        "            \"Servicios proporcionados no cumplen con los indicadores definidos en el Anexo Nº 1\"\n"  
+        "          ],\n"  
+        "          \"pagina\": 6\n"  
+        "        }\n"  
+        "      }\n"  
+        "    },\n"  
+        "    {\n"  
+        "      \"descripcion\": \"Contratación de menores de edad\",\n"  
+        "      \"detalles\": {\n"  
+        "        \"prestador\": \"Prestador de servicios de catering\",\n"  
+        "        \"practica\": \"Contratación de menores de edad para realizar labores en eventos\",\n"  
+        "        \"politicas\": \"Contraria a las políticas de la empresa y a la legislación vigente\",\n"  
+        "        \"multa\": {\n"  
+        "          \"multa\": \"Terminación inmediata del contrato sin indemnización\",\n"  
+        "          \"causal\": \"Contratación de menores de edad\",\n"  
+        "          \"condiciones\": [\n"  
+        "            \"Contratación de menores para la ejecución de los Servicios\"\n"  
+        "          ],\n"  
+        "          \"pagina\": 9\n"  
+        "        }\n"  
+        "      }\n"  
+        "    }\n"  
+        "  ]\n"  
+        "}\n"  
+    ),  
+    "process_contract_final_phase": (  
+        "Tienes la siguiente información dividida en bloques de 5 páginas (contrato completo) en formato JSON, "  
+        "Instrucciones: Necesito tu ayuda para extraer propiedades de un objeto JSON y agrupar sus valores.\n\n"  
+        "Por ejemplo, tengo un JSON que contiene información de contratos y me gustaría agrupar todas las propiedades con el mismo nombre.\n\n"  
+        "### Ejemplo de JSON:\n\n"  
+        "{\n"  
+        '    "pages_1-5": {\n'  
+        '        "Metadata": {\n'  
+        '            "version": "f7028f-v1",\n'  
+        '            "fechaCreacion": "22 de agosto de 2024",\n'  
+        '            "autor": "Victor Manzano",\n'  
+        '            "descripcion": "Contrato de Prestación de Servicios entre Marcadores S.A. y Hornitos S.P.A."\n'  
+        '        },\n'  
+        '        "ResumenEjecutivo": "Este contrato establece los términos de prestación de servicios...",\n'  
+        '        "Paginas": "1-5",\n'  
+        '        "Entidades": {\n'  
+        '            "Persona": [\n'  
+        '                "Matias Alonso Javier Morales Sepulveda",\n'  
+        '                "Lorena Alfonsina Strubbe Font",\n'  
+        '                "Felipe Daniel Jara Flores"\n'  
+        '            ],\n'  
+        '            "Fecha": "22 de agosto de 2024",\n'  
+        '            "Monto": "No encontrado"\n'  
+        '        },\n'  
+        '        "Especificaciones": {\n'  
+        '            "contratos": [\n'  
+        '                {\n'  
+        '                    "propertyName": "tipoContrato",\n'  
+        '                    "descripcion": "Tipo de contrato emitido por la empresa.",\n'  
+        '                    "valor": "Contrato de Prestación de Servicios"\n'  
+        '                },\n'  
+        '                {\n'  
+        '                    "propertyName": "tipoServicio",\n'  
+        '                    "descripcion": "Categoría del servicio proporcionado.",\n'  
+        '                    "valor": "Crowdsource y apoyo operativo"\n'  
+        '                }\n'  
+        '            ]\n'  
+        '        }\n'  
+        '    },\n'  
+        '    "pages_6-10": {\n'  
+        '        // Más datos...\n'  
+        '    }\n'  
+        '}\n\n'  
+        "### Objetivo:\n\n"  
+        "Quiero que agrupe los valores de cada `propertyName` y muestre en qué página se encontraron. "  
+        "Por ejemplo, para `propertyName: \"tipoContrato\"`, quiero ver todos los valores encontrados en cada página.\n\n"  
+        "### Resultado esperado:\n\n"  
+        "Deberías producir un JSON que se vea así:\n\n"  
+        "{\n"  
+        '    "tipoContrato": [\n'  
+        '        {\n'  
+        '            "valor": "Contrato de Prestación de Servicios",\n'  
+        '            "pagina": "pages_1-5"\n'  
+        '        },\n'  
+        '        {\n'  
+        '            "valor": "Prestación de servicios",\n'  
+        '            "pagina": "pages_6-10"\n'  
+        '        }\n'  
+        '    ],\n'  
+        '    "tipoServicio": [\n'  
+        '        {\n'  
+        '            "valor": "Crowdsource y apoyo operativo",\n'  
+        '            "pagina": "pages_1-5"\n'  
+        '        },\n'  
+        '        {\n'  
+        '            "valor": "Servicios de Shopper",\n'  
+        '            "pagina": "pages_6-10"\n'  
+        '        }\n'  
+        '    ]\n'  
+        '}\n\n'  
+        "### Instrucciones:\n\n"  
+        "1. Extrae todas las propiedades del JSON.\n"  
+        "2. Agrupa los valores por `propertyName`.\n"  
+        "3. Incluye la información de la página en la que se encontró cada valor.\n"  
+        "4. Devuelve el resultado en formato JSON.\n\n"  
+        "No debes inventar información. No me des comentarios ni explicaciones. Si algún dato no se encuentra en el contenido proporcionado, "  
+        "simplemente indica 'No encontrado' en lugar de dejar el campo vacío o usar cualquier otro valor.**\n\n"  
+        "Esta es la información del contrato del cual tienes que seguir las instrucciones. "  
+        "Los datos anteriores son solo un ejemplo. Usa estos datos y procesa toda la información:\n\n"  
+        "*** START *** {contract_text} *** DATA END ****\n"  
+    )  
+}  
